@@ -1,0 +1,25 @@
+app\models\room\Room:
+  type: entity
+  table: room
+  id:
+    id:
+      id: true
+      column: id
+      type: Type\Room\Id
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: 'app\helpers\HashIdGenerator'
+  fields:
+    name:
+      column: name
+      type: Type\Room\Name
+      nullable: false
+    description:
+      column: description
+      type: Type\Room\Description
+      nullable: false
+    image:
+      column: image
+      type: Type\Room\Image
+      nullable: false

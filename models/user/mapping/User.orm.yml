@@ -1,0 +1,37 @@
+app\models\user\User:
+  type: entity
+  table: user
+  id:
+    id:
+      id: true
+      column: id
+      type: Type\User\Id
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: 'app\helpers\HashIdGenerator'
+  fields:
+    username:
+      column: username
+      type: Type\User\Username
+      nullable: false
+    authKey:
+      column: auth_key
+      type: Type\User\AuthKey
+      nullable: false
+    accessToken:
+      column: access_token
+      type: Type\User\AccessToken
+      nullable: false
+    passwordHash:
+      column: password_hash
+      type: Type\User\PasswordHash
+      nullable: false
+    phone:
+      column: phone
+      type: Type\User\Phone
+      nullable: true
+    name:
+      column: name
+      type: Type\User\Name
+      nullable: true
