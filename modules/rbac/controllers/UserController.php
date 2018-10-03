@@ -1,9 +1,7 @@
 <?php
-
 namespace app\modules\rbac\controllers;
 
 use app\modules\rbac\forms\LoginForm;
-use app\modules\rbac\forms\CreateForm;
 use app\modules\rbac\forms\RegisterForm;
 use app\modules\rbac\Module;
 use yii\filters\AccessControl;

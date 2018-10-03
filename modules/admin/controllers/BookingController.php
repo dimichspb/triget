@@ -42,6 +42,15 @@ class BookingController extends Controller
      */
     public $module;
 
+    /**
+     * BookingController constructor.
+     * @param $id
+     * @param Module $module
+     * @param Request $request
+     * @param Session $session
+     * @param User $user
+     * @param array $config
+     */
     public function __construct($id, Module $module, Request $request, Session $session,
                                 \yii\web\User $user, array $config = [])
     {
@@ -112,6 +121,10 @@ class BookingController extends Controller
         return $this->goBack();
     }
 
+    /**
+     * Booking index action
+     * @return string
+     */
     public function actionIndex()
     {
         $searchModel = new SearchModel();

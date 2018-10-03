@@ -12,16 +12,31 @@ use app\models\booking\StartDate;
 use app\models\user\Name;
 use app\models\user\Phone;
 use app\repositories\booking\RepositoryInterface;
+use League\Flysystem\FilesystemInterface;
 use yii\data\ArrayDataProvider;
 use app\services\room\Service as RoomService;
 use app\services\user\Service as UserService;
 
 class Service
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $repository;
+
+    /**
+     * @var RoomService
+     */
     protected $roomService;
+
+    /**
+     * @var UserService
+     */
     protected $userService;
 
+    /**
+     * @var FilesystemInterface
+     */
     protected $filesystem;
 
     public function __construct(RepositoryInterface $repository, RoomService $roomService, UserService $userService)

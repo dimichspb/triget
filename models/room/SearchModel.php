@@ -13,6 +13,7 @@ class SearchModel extends BaseSearchModel
     public $name;
     public $page;
     public $limit;
+
     /**
      * {@inheritdoc}
      */

@@ -7,13 +7,44 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class User extends BaseModel implements \yii\web\IdentityInterface
 {
+    /**
+     * @var Id
+     */
     protected $id;
+
+    /**
+     * @var Username
+     */
     protected $username;
+
+    /**
+     * @var AuthKey
+     */
     protected $authKey;
+
+    /**
+     * @var AccessToken
+     */
     protected $accessToken;
+
+    /**
+     * @var PasswordHash
+     */
     protected $passwordHash;
+
+    /**
+     * @var Phone
+     */
     protected $phone;
+
+    /**
+     * @var Name
+     */
     protected $name;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $bookings;
 
     public function __construct(Id $id, Username $username = null, AuthKey $authKey = null, AccessToken $accessToken = null,

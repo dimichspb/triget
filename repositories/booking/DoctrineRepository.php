@@ -50,6 +50,11 @@ class DoctrineRepository implements RepositoryInterface
         return $booking;
     }
 
+    /**
+     * Find one by criteria
+     * @param array $criteria
+     * @return mixed
+     */
     public function find(array $criteria = [])
     {
         try {
@@ -63,6 +68,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Add new Booking to repository
      * @param Booking $booking
      */
     public function add(Booking $booking)
@@ -76,6 +82,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Update Booking in repository
      * @param Booking $booking
      */
     public function update(Booking $booking)
@@ -88,6 +95,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Delete Booking from repository
      * @param Booking $booking
      */
     public function delete(Booking $booking)
@@ -115,6 +123,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Get all Bookings by criteria
      * @param array $criteria
      * @param array|null $orderBy
      * @param int $offset
@@ -132,11 +141,23 @@ class DoctrineRepository implements RepositoryInterface
         return $bookings;
     }
 
+    /**
+     * Count Bookings by criteria
+     * @param array $criteria
+     * @return int
+     */
     public function count(array $criteria = [])
     {
         return $this->entityRepository->count($criteria);
     }
 
+    /**
+     * Find bookings for particular room for specified period
+     * @param Room $room
+     * @param StartDate $startDate
+     * @param EndDate $endDate
+     * @return mixed
+     */
     public function findInDateRange(Room $room, StartDate $startDate, EndDate $endDate)
     {
         $query = $this->em

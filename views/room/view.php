@@ -58,6 +58,6 @@ JS
     </div>
 </div>
 
-<?= $this->render('_booking', [
+<?= $this->render('/booking/_booking', [
     'form' => $form,
 ]); ?>

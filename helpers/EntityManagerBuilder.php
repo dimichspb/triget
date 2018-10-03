@@ -21,6 +21,13 @@ class EntityManagerBuilder
     private $autoCommit;
     private $sqlLogger;
 
+    /**
+     * With proxy directory
+     * @param $dir
+     * @param $namespace
+     * @param $autoGenerate
+     * @return $this
+     */
     public function withProxyDir($dir, $namespace, $autoGenerate)
     {
         $this->proxyDir = $dir;
@@ -29,48 +36,90 @@ class EntityManagerBuilder
         return $this;
     }
 
+    /**
+     * With cache
+     * @param CacheProvider $cache
+     * @return $this
+     */
     public function withCache(CacheProvider $cache)
     {
         $this->cacheProvider = $cache;
         return $this;
     }
 
+    /**
+     * With mapping
+     * @param MappingDriver $driver
+     * @return $this
+     */
     public function withMapping(MappingDriver $driver)
     {
         $this->mappingDriver = $driver;
         return $this;
     }
 
+    /**
+     * With subscribers
+     * @param array $subscribers
+     * @return $this
+     */
     public function withSubscribers(array $subscribers)
     {
         $this->subscribers = $subscribers;
         return $this;
     }
 
+    /**
+     * With listeners
+     * @param array $listeners
+     * @return $this
+     */
     public function withListeners(array $listeners)
     {
         $this->listeners = $listeners;
         return $this;
     }
 
+    /**
+     * With types
+     * @param array $types
+     * @return $this
+     */
     public function withTypes(array $types)
     {
         $this->types = $types;
         return $this;
     }
 
+    /**
+     * With Autocommit
+     * @param $autocommit
+     * @return $this
+     */
     public function withAutocommit($autocommit)
     {
         $this->autoCommit = $autocommit;
         return $this;
     }
 
+    /**
+     * With SQLLogger
+     * @param $sqlLogger
+     * @return $this
+     */
     public function withSQLLogger($sqlLogger)
     {
         $this->sqlLogger = $sqlLogger;
         return $this;
     }
 
+    /**
+     * Build Entity manager
+     * @param $params
+     * @return EntityManager
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     */
     public function build($params)
     {
         $this->checkParameters();
@@ -111,6 +160,9 @@ class EntityManagerBuilder
         return EntityManager::create($params, $config, $evm);
     }
 
+    /**
+     * Check params
+     */
     private function checkParameters()
     {
         if (empty($this->proxyDir) || empty($this->proxyNamespace)) {

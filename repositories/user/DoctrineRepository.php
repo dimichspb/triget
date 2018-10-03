@@ -46,6 +46,11 @@ class DoctrineRepository implements RepositoryInterface
         return $user;
     }
 
+    /**
+     * Find one by criteria
+     * @param array $criteria
+     * @return mixed
+     */
     public function find(array $criteria = [])
     {
         try {
@@ -111,6 +116,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Get all Rooms by criteria
      * @param array $criteria
      * @param array|null $orderBy
      * @param int $offset
@@ -128,6 +134,11 @@ class DoctrineRepository implements RepositoryInterface
         return $users;
     }
 
+    /**
+     * Count rooms by criateria
+     * @param array $criteria
+     * @return int
+     */
     public function count(array $criteria = [])
     {
         return $this->entityRepository->count($criteria);

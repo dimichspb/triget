@@ -43,6 +43,15 @@ class RoomController extends Controller
      */
     public $module;
 
+    /**
+     * RoomController constructor.
+     * @param $id
+     * @param Module $module
+     * @param Request $request
+     * @param Session $session
+     * @param User $user
+     * @param array $config
+     */
     public function __construct($id, Module $module, Request $request, Session $session,
                                 \yii\web\User $user, array $config = [])
     {
@@ -89,6 +98,12 @@ class RoomController extends Controller
         ]);
     }
 
+    /**
+     * Room view action
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionView($id)
     {
         $model = $this->findModel($id);
@@ -108,6 +123,10 @@ class RoomController extends Controller
         ]);
     }
 
+    /**
+     * Room create action
+     * @return string|\yii\web\Response
+     */
     public function actionCreate()
     {
         $form = new CreateForm();
@@ -125,6 +144,12 @@ class RoomController extends Controller
         ]);
     }
 
+    /**
+     * Room update action
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);

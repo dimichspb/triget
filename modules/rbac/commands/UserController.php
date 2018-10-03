@@ -1,8 +1,7 @@
 <?php
-
 namespace app\modules\rbac\commands;
 
-use app\modules\rbac\forms\CreateForm;
+use app\modules\rbac\forms\RegisterForm;
 use yii\console\Controller;
 use yii\console\ExitCode;
 
@@ -17,7 +16,7 @@ class UserController extends Controller
     public $defaultAction = 'register';
 
     /**
-     * This command creates admin user.
+     * This command creates user.
      * @param $username
      * @param $password
      * @return int Exit code
@@ -25,7 +24,7 @@ class UserController extends Controller
      */
     public function actionRegister($username, $password)
     {
-        $form = new CreateForm();
+        $form = new RegisterForm();
         $form->username = $username;
         $form->password = $password;
 

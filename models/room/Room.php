@@ -6,12 +6,39 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Room extends BaseModel
 {
+    /**
+     * @var Id
+     */
     protected $id;
+
+    /**
+     * @var Name
+     */
     protected $name;
+
+    /**
+     * @var Description
+     */
     protected $description;
+
+    /**
+     * @var Image
+     */
     protected $image;
+
+    /**
+     * @var ArrayCollection
+     */
     protected $bookings;
 
+    /**
+     * Room constructor.
+     * @param Id $id
+     * @param Name|null $name
+     * @param Description|null $description
+     * @param Image|null $image
+     * @param ArrayCollection|null $bookings
+     */
     public function __construct(Id $id, Name $name = null, Description $description = null, Image $image = null, ArrayCollection $bookings = null)
     {
         $this->id = $id;

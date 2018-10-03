@@ -3,6 +3,7 @@
 namespace app\modules\rbac\tests\unit\models;
 
 use app\models\user\User;
+use app\models\user\Username;
 
 class UserTest extends \Codeception\Test\Unit
 {
@@ -17,7 +18,7 @@ class UserTest extends \Codeception\Test\Unit
     public function _before()
     {
         $this->model = new User();
-        $this->model->username = 'user';
+        $this->model->setUsername(new Username('user'));
         $this->model->generateAccessToken();
         $this->model->generateAuthKey();
         $this->model->save();
@@ -36,8 +37,8 @@ class UserTest extends \Codeception\Test\Unit
      */
     public function testFindUserByIdSuccess()
     {
-        expect_that($user = User::findIdentity($this->model->id));
-        expect($user->username)->equals($this->model->username);
+        expect_that($user = User::findIdentity($this->model->getId()->getValue()));
+        expect($user->getUserName()->getValue())->equals($this->model->getUserName()->getValue());
     }
 
     /**
@@ -53,8 +54,8 @@ class UserTest extends \Codeception\Test\Unit
      */
     public function testFindUserByAccessTokenSuccess()
     {
-        expect_that($user = User::findIdentityByAccessToken($this->model->access_token));
-        expect($user->username)->equals($this->model->username);
+        expect_that($user = User::findIdentityByAccessToken($this->model->getAccessToken()->getValue()));
+        expect($user->getUserName()->getValue())->equals($this->model->getUserName()->getValue());
     }
 
     /**
@@ -70,8 +71,8 @@ class UserTest extends \Codeception\Test\Unit
      */
     public function testFindUserByUsernameSuccess()
     {
-        expect_that($user = User::findByUsername($this->model->username));
-        expect($user->username)->equals($this->model->username);
+        expect_that($user = User::findByUsername($this->model->getUserName()->getValue()));
+        expect($user->getUserName()->getValue())->equals($this->model->getUserName()->getValue());
     }
 
     /**
@@ -88,8 +89,8 @@ class UserTest extends \Codeception\Test\Unit
      */
     public function testValidateAuthkeySuccess()
     {
-        $user = User::findByUsername($this->model->username);
-        expect_that($user->validateAuthKey($this->model->auth_key));
+        $user = User::findByUsername($this->model->getUserName()->getValue());
+        expect_that($user->validateAuthKey($this->model->getAuthKey()));
     }
 
     /**
@@ -97,7 +98,7 @@ class UserTest extends \Codeception\Test\Unit
      */
     public function testValidateAuthkeyFailed()
     {
-        $user = User::findByUsername($this->model->username);
+        $user = User::findByUsername($this->model->getUserName()->getValue());
         expect_not($user->validateAuthKey('not-existing'));
     }
 }

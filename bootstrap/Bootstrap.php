@@ -24,6 +24,12 @@ use yii\web\User;
 
 class Bootstrap implements BootstrapInterface
 {
+    /**
+     * Bootstrap application
+     *
+     * @param \yii\base\Application $app
+     * @throws \yii\db\Exception
+     */
     public function bootstrap($app)
     {
         /** @var Container $container */

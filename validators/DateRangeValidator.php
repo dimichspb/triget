@@ -6,7 +6,6 @@ use app\models\booking\StartDate;
 use app\models\room\Id;
 use app\services\room\Service as RoomService;
 use app\services\booking\Service as BookingService;
-use yii\validators\DateValidator;
 use yii\validators\Validator;
 
 class DateRangeValidator extends Validator
@@ -16,10 +15,22 @@ class DateRangeValidator extends Validator
     public $minDate;
     public $targetAttribute;
 
+    /**
+     * @var RoomService
+     */
     protected $roomService;
 
+    /**
+     * @var BookingService
+     */
     protected $bookingService;
 
+    /**
+     * DateRangeValidator constructor.
+     * @param RoomService $roomService
+     * @param BookingService $bookingService
+     * @param array $config
+     */
     public function __construct(RoomService $roomService, BookingService $bookingService, array $config = [])
     {
         $this->roomService = $roomService;
@@ -28,6 +39,12 @@ class DateRangeValidator extends Validator
         parent::__construct($config);
     }
 
+    /**
+     * Validate DateRange
+     * @param \yii\base\Model $model
+     * @param string $attribute
+     * @throws \Exception
+     */
     public function validateAttribute($model, $attribute)
     {
         list($start, $end) = explode($this->separator, $model->$attribute, 2);
@@ -40,6 +57,14 @@ class DateRangeValidator extends Validator
         }
     }
 
+    /**
+     * Validate Dates
+     * @param $model
+     * @param $attribute
+     * @param $startDate
+     * @param $endDate
+     * @throws \Exception
+     */
     protected function validateDates($model, $attribute, $startDate, $endDate)
     {
         $today = $this->minDate? \DateTimeImmutable::createFromFormat($this->format, $this->minDate): new \DateTimeImmutable();
@@ -53,6 +78,14 @@ class DateRangeValidator extends Validator
         }
     }
 
+    /**
+     * Validate Availability
+     * @param $model
+     * @param $attribute
+     * @param $targetAttribute
+     * @param \DateTimeImmutable $startDate
+     * @param \DateTimeImmutable $endDate
+     */
     protected function validateAvailability($model, $attribute, $targetAttribute, \DateTimeImmutable $startDate, \DateTimeImmutable $endDate)
     {
         $results = $this->bookingService->checkAvailability(new Id($model->$targetAttribute), new StartDate($startDate->format('d-m-Y')), new EndDate($endDate->format('d-m-Y')));

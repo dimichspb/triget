@@ -2,20 +2,50 @@
 namespace app\models\booking;
 
 use app\models\BaseModel;
-use app\models\room\Id as RoomId;
 use app\models\room\Room;
-use app\models\user\Id as UserId;
 use app\models\user\User;
 
 class Booking extends BaseModel
 {
+    /**
+     * @var Id
+     */
     protected $id;
+
+    /**
+     * @var StartDate
+     */
     protected $startDate;
+
+    /**
+     * @var EndDate
+     */
     protected $endDate;
+
+    /**
+     * @var Confirmed
+     */
     protected $confirmed;
+
+    /**
+     * @var Room
+     */
     protected $room;
+
+    /**
+     * @var User
+     */
     protected $user;
 
+    /**
+     * Booking constructor.
+     * @param Id $id
+     * @param Room $room
+     * @param User $user
+     * @param StartDate $startDate
+     * @param EndDate $endDate
+     * @param Confirmed $confirmed
+     */
     public function __construct(Id $id, Room $room, User $user, StartDate $startDate,
                                 EndDate $endDate, Confirmed $confirmed)
     {

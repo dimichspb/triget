@@ -1,8 +1,10 @@
 <?php
 namespace app\modules\rbac\tests\unit;
 
-use app\modules\rbac\forms\CreateForm;
-use app\modules\rbac\models\User;
+use app\models\user\Id;
+use app\models\user\User;
+use app\models\user\Username;
+use app\modules\rbac\forms\RegisterForm;
 use Codeception\Test\Unit;
 
 class RegisterFormTest extends Unit
@@ -12,7 +14,7 @@ class RegisterFormTest extends Unit
      */
     public function testValidateUsernameSuccess()
     {
-        $model = new CreateForm();
+        $model = new RegisterForm();
         $model->username = 'user1';
 
         expect($model->validate())->true();
@@ -24,7 +26,7 @@ class RegisterFormTest extends Unit
      */
     public function testValidateUsernameNullFailed()
     {
-        $model = new CreateForm();
+        $model = new RegisterForm();
         $model->username = null;
 
         expect($model->validate())->false();
@@ -36,14 +38,14 @@ class RegisterFormTest extends Unit
      */
     public function testValidateUsernameExistsFailed()
     {
-        $user = new User();
-        $user->username = 'user1';
+        $user = new User(new Id(1));
+        $user->setUsername(new Username('user1'));
         $user->generateAccessToken();
         $user->generateAuthKey();
-        $user->save();
 
-        $model = new CreateForm();
-        $model->username = $user->username;
+
+        $model = new RegisterForm();
+        $model->username = $user->getUsername()->getValue();
 
         expect($model->validate())->false();
         expect($model->hasErrors('username'))->true();

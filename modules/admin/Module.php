@@ -27,10 +27,19 @@ class Module extends \yii\base\Module
      */
     public $controllerNamespace = 'app\modules\admin\controllers';
 
+    /**
+     * {@inheritdoc}
+     */
     public $defaultRoute = 'room/index';
 
+    /**
+     * @var RoomService
+     */
     protected $roomService;
 
+    /**
+     * @var BookingService
+     */
     protected $bookingService;
 
     public function __construct($id, \yii\base\Module $parent, RoomService $roomService, BookingService $bookingService,
@@ -42,31 +51,62 @@ class Module extends \yii\base\Module
         parent::__construct($id, $parent, $config);
     }
 
+    /**
+     * Get Room by Id
+     * @param RoomId $id
+     * @return mixed
+     */
     public function getRoomById(RoomId $id)
     {
         return $this->roomService->getById($id);
     }
 
+    /**
+     * Prepare Room DataProvider
+     * @param RoomSearchModel $searchModel
+     * @return \yii\data\ArrayDataProvider
+     */
     public function getRoomDataProvider(RoomSearchModel $searchModel)
     {
         return $this->roomService->getDataProvider($searchModel);
     }
 
+    /**
+     * Get Booking by Id
+     * @param BookingId $id
+     * @return mixed
+     */
     public function getBookingById(BookingId $id)
     {
         return $this->bookingService->getById($id);
     }
 
+    /**
+     * Prepare Booking DataProvider
+     * @param BookingSearchModel $searchModel
+     * @return \yii\data\ArrayDataProvider
+     */
     public function getBookingDataProvider(BookingSearchModel $searchModel)
     {
         return $this->bookingService->getDataProvider($searchModel);
     }
 
+    /**
+     * Update booking
+     * @param Booking $booking
+     * @return mixed
+     */
     public function updateBooking(Booking $booking)
     {
         return $this->bookingService->update($booking);
     }
 
+    /**
+     * Upload file
+     * @param UploadForm $form
+     * @param Room $model
+     * @return string
+     */
     public function upload(UploadForm $form, Room $model)
     {
         $filename = $model->getId()->getValue() . '.' . $form->image->extension;
@@ -75,6 +115,11 @@ class Module extends \yii\base\Module
         return $filename;
     }
 
+    /**
+     * Create Room from form
+     * @param CreateForm $form
+     * @return Room
+     */
     public function createRoom(CreateForm $form)
     {
         $room = new Room($this->roomService->nextId());
@@ -86,6 +131,11 @@ class Module extends \yii\base\Module
         return $room;
     }
 
+    /**
+     * Create new Room and upload image
+     * @param CreateForm $form
+     * @return Room
+     */
     public function createAndUpload(CreateForm $form)
     {
         $model = $this->createRoom($form);
@@ -98,6 +148,12 @@ class Module extends \yii\base\Module
         return $model;
     }
 
+    /**
+     * Update Room and upload image
+     * @param UpdateForm $form
+     * @param Room $model
+     * @return Room
+     */
     public function updateAndUpload(UpdateForm $form, Room $model)
     {
         $model->setName(new Name($form->name));

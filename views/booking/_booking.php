@@ -18,9 +18,9 @@ use yii\bootstrap\Html;
 ?>
 <?php $activeForm = ActiveForm::begin([
     'id' => 'booking-form',
-    'action' => ['room/book'],
+    'action' => ['booking/create'],
     'enableAjaxValidation' => true,
-    'validationUrl' => ['room/validate'],
+    'validationUrl' => ['booking/validate'],
 ]) ?>
 
 <div class="row">

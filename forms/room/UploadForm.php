@@ -12,6 +12,10 @@ class UploadForm extends Model
      */
     public $image;
 
+    /**
+     * Validation rules
+     * @return array
+     */
     public function rules()
     {
         return [

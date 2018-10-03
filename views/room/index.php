@@ -28,6 +28,6 @@ $this->title = \Yii::t('app', 'Rooms');
     </div>
 </div>
 
-<?= $this->render('_booking', [
+<?= $this->render('/booking/_booking', [
     'form' => $form,
 ]); ?>

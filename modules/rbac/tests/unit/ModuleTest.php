@@ -1,8 +1,8 @@
 <?php
 namespace app\modules\rbac\tests\unit;
 
+use app\models\user\User;
 use app\modules\rbac\forms\LoginForm;
-use app\modules\rbac\models\User;
 use app\modules\rbac\Module;
 use Codeception\Test\Unit;
 
@@ -38,7 +38,7 @@ class ModuleTest extends Unit
 
         expect($user)->isInstanceOf(User::class);
         expect($user->hasErrors())->false();
-        expect($user->id)->notNull();
+        expect($user->getId()->getValue())->notNull();
     }
 
     /**
@@ -49,11 +49,11 @@ class ModuleTest extends Unit
     {
         $user = $this->module->createUser('user');
 
-        $found = $this->module->getUser($user->username);
+        $found = $this->module->getUser($user->getUsername()->getValue());
 
         expect($found)->isInstanceOf(User::class);
-        expect($found->id)->equals($user->id);
-        expect($found->username)->equals($user->username);
+        expect($found->getId()->getValue())->equals($user->getId()->getValue());
+        expect($found->getUsername()->getValue())->equals($user->getUsername()->getValue());
         expect($found->access_token)->equals($user->access_token);
         expect($found->auth_key)->equals($user->auth_key);
     }
@@ -91,7 +91,7 @@ class ModuleTest extends Unit
         $user = $this->module->createUser('user');
 
         $model = new LoginForm([
-            'username' => $user->username,
+            'username' => $user->getUsername()->getValue(),
         ]);
 
         expect_that($this->module->login($model));

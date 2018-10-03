@@ -46,6 +46,11 @@ class DoctrineRepository implements RepositoryInterface
         return $room;
     }
 
+    /**
+     * Find one by criteria
+     * @param array $criteria
+     * @return mixed
+     */
     public function find(array $criteria = [])
     {
         try {
@@ -59,6 +64,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Add new Room to repository
      * @param Room $room
      */
     public function add(Room $room)
@@ -72,6 +78,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Update room in repository
      * @param Room $room
      */
     public function update(Room $room)
@@ -84,6 +91,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Delete Room from repository
      * @param Room $room
      */
     public function delete(Room $room)
@@ -111,6 +119,7 @@ class DoctrineRepository implements RepositoryInterface
     }
 
     /**
+     * Get all rooms by criteria
      * @param array $criteria
      * @param array|null $orderBy
      * @param int $offset

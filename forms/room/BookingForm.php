@@ -11,6 +11,10 @@ class BookingForm extends Model
     public $phone;
     public $range;
 
+    /**
+     * Validation rules
+     * @return array
+     */
     public function rules()
     {
         return [
@@ -37,12 +41,20 @@ class BookingForm extends Model
         ];
     }
 
+    /**
+     * Get start date from range
+     * @return mixed
+     */
     public function getStartDate()
     {
         list($start, $end) = explode(' - ', $this->range, 2);
         return $start;
     }
 
+    /**
+     * Get end date from range
+     * @return mixed
+     */
     public function getEndDate()
     {
         list($start, $end) = explode(' - ', $this->range, 2);
