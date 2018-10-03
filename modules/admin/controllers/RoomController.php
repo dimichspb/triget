@@ -4,7 +4,8 @@ namespace app\modules\admin\controllers;
 
 use app\models\room\Id;
 use app\models\room\Room;
-use app\models\room\SearchModel;
+use app\models\room\SearchModel as RoomSearchModel;
+use app\models\booking\SearchModel as BookingSearchModel;
 use app\modules\admin\forms\CreateForm;
 use app\modules\admin\forms\UpdateForm;
 use yii\base\Module;
@@ -77,10 +78,10 @@ class RoomController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SearchModel();
+        $searchModel = new RoomSearchModel();
         $searchModel->load($this->request->getQueryParams());
 
-        $dataProvider = $this->module->getDataProvider($searchModel);
+        $dataProvider = $this->module->getRoomDataProvider($searchModel);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -92,8 +93,18 @@ class RoomController extends Controller
     {
         $model = $this->findModel($id);
 
+        $searchModel = new BookingSearchModel();
+        $searchModel->load($this->request->getQueryParams());
+        $searchModel->room = $model;
+
+        $dataProvider = $this->module->getBookingDataProvider($searchModel);
+
+        $this->user->setReturnUrl(['admin/room/view', 'id' => $model->getId()->getValue()]);
+
         return $this->render('view', [
             'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

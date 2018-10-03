@@ -25,6 +25,6 @@ class m181001_064314_create_room_table extends Migration
     }
     public function safeDown()
     {
-        $this->dropTable('{{%user}}');
+        $this->dropTable('{{%room}}');
     }
 }

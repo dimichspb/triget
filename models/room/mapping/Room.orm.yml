@@ -23,3 +23,7 @@ app\models\room\Room:
       column: image
       type: Type\Room\Image
       nullable: false
+  oneToMany:
+    bookings:
+      targetEntity: app\models\booking\Booking
+      mappedBy: room

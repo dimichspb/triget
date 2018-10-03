@@ -12,7 +12,7 @@ class ImageProcessor
         $this->imageLibrary = $imageLibrary;
     }
 
-    public function resize($stream, $width = null, $height = null, $background = 'transparent')
+    public function resize($stream, $width = null, $height = null, $background = 'white')
     {
         $content = stream_get_contents($stream);
         $image = $this->imageLibrary->fromResource(imagecreatefromstring($content));

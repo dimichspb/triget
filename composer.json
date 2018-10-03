@@ -23,7 +23,9 @@
         "symfony/yaml": "*",
         "ramsey/uuid": "^3.8",
         "league/flysystem": "^1.0",
-        "gregwar/image": "2.*"
+        "gregwar/image": "2.*",
+        "kartik-v/yii2-widget-activeform": "@dev",
+        "kartik-v/yii2-date-range": "*"
 
     },
     "require-dev": {

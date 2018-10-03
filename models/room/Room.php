@@ -2,6 +2,7 @@
 namespace app\models\room;
 
 use app\models\BaseModel;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Room extends BaseModel
 {
@@ -9,13 +10,15 @@ class Room extends BaseModel
     protected $name;
     protected $description;
     protected $image;
+    protected $bookings;
 
-    public function __construct(Id $id, Name $name = null, Description $description = null, Image $image = null)
+    public function __construct(Id $id, Name $name = null, Description $description = null, Image $image = null, ArrayCollection $bookings = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
         $this->image = $image;
+        $this->bookings = $bookings? $bookings: new ArrayCollection();
     }
 
     /**
@@ -72,5 +75,13 @@ class Room extends BaseModel
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
     }
 }

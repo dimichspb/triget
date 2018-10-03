@@ -3,6 +3,8 @@ namespace app\services\user;
 
 use app\models\user\AccessToken;
 use app\models\user\Id;
+use app\models\user\Name;
+use app\models\user\Phone;
 use app\models\user\User;
 use app\models\user\Username;
 use app\repositories\user\RepositoryInterface;
@@ -28,6 +30,13 @@ class Service
         ]);
     }
 
+    public function getByPhone(Phone $phone)
+    {
+        return $this->repository->find([
+            'phone' => $phone,
+        ]);
+    }
+
     public function getByAccessToken(AccessToken $accessToken)
     {
         return $this->repository->find([
@@ -43,5 +52,20 @@ class Service
     public function nextId()
     {
         return $this->repository->nextId();
+    }
+
+    public function createByNameAndPhone(Name $name, Phone $phone)
+    {
+        $user = new User(
+            $this->nextId()
+        );
+        $user->setUsername(new Username($phone->getValue()));
+        $user->setPassword($phone->getValue());
+        $user->setName($name);
+        $user->setPhone($phone);
+        $user->generateAccessToken();
+        $user->generateAuthKey();
+
+        return $user;
     }
 }

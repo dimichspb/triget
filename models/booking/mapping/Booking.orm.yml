@@ -1,0 +1,38 @@
+app\models\booking\Booking:
+  type: entity
+  table: booking
+  id:
+    id:
+      id: true
+      column: id
+      type: Type\Booking\Id
+      generator:
+        strategy: CUSTOM
+      customIdGenerator:
+        class: 'app\helpers\HashIdGenerator'
+  fields:
+    startDate:
+      column: start_date
+      type: Type\Booking\StartDate
+      nullable: false
+    endDate:
+      column: end_date
+      type: Type\Booking\EndDate
+      nullable: false
+    confirmed:
+      column: confirmed
+      type: Type\Booking\Confirmed
+      nullable: false
+  manyToOne:
+    room:
+      targetEntity: app\models\room\Room
+      inversedBy: bookings
+      joinColumn:
+        name: room_id
+        referencedColumnName: id
+    user:
+      targetEntity: app\models\user\User
+      inversedBy: bookings
+      joinColumn:
+        name: user_id
+        referencedColumnName: id

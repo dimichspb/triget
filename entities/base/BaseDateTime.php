@@ -13,6 +13,6 @@ abstract class BaseDateTime extends BaseEntity
 
     public function __toString()
     {
-
+        return (string)$this->value;
     }
 }

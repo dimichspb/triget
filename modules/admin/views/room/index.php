@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="col-sm-12 col-md-6 text-right">
                 <?= Html::a(\Yii::t('app', 'Create'), ['room/create'], ['class' => 'btn btn-default']) ?>
+                <?= Html::a(\Yii::t('app', 'Bookings list'), ['booking/index'], ['class' => 'btn btn-default']) ?>
             </div>
         </div>
     </div>
@@ -36,8 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'name',
                     'value' => function (\app\models\room\Room $model) {
-                        return $model->getName();
-                    }
+                        return Html::a($model->getName(), ['room/view', 'id' => $model->getId()->getValue()]);
+                    },
+                    'format' => 'raw'
                 ],
                 [
                     'class' => \yii\grid\ActionColumn::class,

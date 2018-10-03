@@ -3,6 +3,7 @@ namespace app\models\user;
 
 use app\models\BaseModel;
 use app\services\user\Service;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class User extends BaseModel implements \yii\web\IdentityInterface
 {
@@ -13,9 +14,10 @@ class User extends BaseModel implements \yii\web\IdentityInterface
     protected $passwordHash;
     protected $phone;
     protected $name;
+    protected $bookings;
 
     public function __construct(Id $id, Username $username = null, AuthKey $authKey = null, AccessToken $accessToken = null,
-                                PasswordHash $passwordHash = null, Phone $phone = null , Name $name = null)
+                                PasswordHash $passwordHash = null, Phone $phone = null , Name $name = null, ArrayCollection $bookings = null)
     {
         $this->id = $id;
         $this->username = $username;
@@ -24,6 +26,7 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $this->passwordHash = $passwordHash;
         $this->phone = $phone;
         $this->name = $name;
+        $this->bookings = $bookings? $bookings: new ArrayCollection();
     }
 
     /**
@@ -190,5 +193,11 @@ class User extends BaseModel implements \yii\web\IdentityInterface
         $this->name = $name;
     }
 
-
+    /**
+     * @return ArrayCollection
+     */
+    public function getBookings()
+    {
+        return $this->bookings;
+    }
 }

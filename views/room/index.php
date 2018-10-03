@@ -7,6 +7,7 @@ use yii\web\View;
 /** @var $this View */
 /** @var $searchModel SearchModel */
 /** @var $dataProvider DataProviderInterface */
+/** @var $form \app\forms\room\BookingForm */
 
 $this->title = \Yii::t('app', 'Rooms');
 
@@ -26,3 +27,7 @@ $this->title = \Yii::t('app', 'Rooms');
         </div>
     </div>
 </div>
+
+<?= $this->render('_booking', [
+    'form' => $form,
+]); ?>

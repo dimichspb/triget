@@ -35,3 +35,7 @@ app\models\user\User:
       column: name
       type: Type\User\Name
       nullable: true
+  oneToMany:
+    bookings:
+      targetEntity: app\models\booking\Booking
+      mappedBy: user
